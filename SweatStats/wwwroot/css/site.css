@@ -12,6 +12,16 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+.btn-primary{
+    background-color: #5EBC67 !important;
+    border-color: #5EBC67 !important;
+}
+
+.btn-primary:hover{
+    background-color: #4FAA5D !important;
+    border-color: #4FAA5D !important;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -19,4 +29,26 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+#navbar {
+    background-color: #5EBC67;
+}
+
+#navbar-logo {
+  width: 100px;
+}
+
+.login-container{
+    margin: 0 auto;
+    width: 70%;
+    text-align: center;
+}
+
+.form-container {
+    text-align: left;
+}
+
+#login-button{
+    width: 100%;
 }
