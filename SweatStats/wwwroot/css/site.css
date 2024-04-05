@@ -49,6 +49,12 @@ body {
     text-align: left;
 }
 
-#login-button{
+.login-register-button{
     width: 100%;
+}
+
+.register-container{
+    margin: 0 auto;
+    width: 70%;
+    text-align: center;
 }
