@@ -1,0 +1,35 @@
+﻿@model RegisterViewModel
+@{
+   ViewData["Title"] = "Register";
+}
+<div class="register-container">
+   <div class="form-container mt-4">
+      <form method="post" asp-controller="Register" asp-action="Register">
+            <div asp-validation-summary="All"></div>
+            <div class="mt-3">
+                <label asp-for="Username"></label>
+                <input class="form-control"  asp-for="Username"/>
+                <span asp-validation-for="Username"></span>
+            </div>
+            <div class="mt-3">
+                <label asp-for="Email"></label>
+                <input class="form-control" asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="mt-3">
+                <label asp-for="Password"></label>
+                <input class="form-control" asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="mt-3">
+                <label asp-for="PasswordConfirm"></label>
+                <input class="form-control" asp-for="PasswordConfirm" />
+                <span asp-validation-for="PasswordConfirm"></span>
+            </div>
+            <div class="mt-4">
+                <input type="submit" value="Register" class="btn btn-primary login-register-button" />
+            </div>
+      </form>
+   </div>
+</div>
+

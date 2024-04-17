@@ -1,0 +1,33 @@
+﻿@model TrainingViewModel
+@{
+    ViewData["Title"] = "Training";
+}
+
+<h1>Trainingen</h1>
+<a class="btn btn-primary" asp-action="Add" asp-controller="Training">Add Training</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.trainings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

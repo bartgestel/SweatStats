@@ -1,0 +1,15 @@
+﻿@model TrainingViewModel
+@{
+    ViewData["Title"] = "Add Training";
+}
+<h1>Add Training</h1>
+<form method="post" asp-action="Add" asp-controller="Training">
+    <div asp-validation-summary="All"></div>
+    <div class="mt-3">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name"/>
+    </div>
+    <div class="mt-3">
+        <input type="submit" value="Add training" class="btn btn-primary"/>
+    </div>
+</form>
