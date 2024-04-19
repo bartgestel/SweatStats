@@ -172,8 +172,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IOefeningDAL.cs" />
     <Compile Include="Interfaces\ITrainingDAL.cs" />
     <Compile Include="Interfaces\IUserDAL.cs" />
+    <Compile Include="Oefening.cs" />
     <Compile Include="Training.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

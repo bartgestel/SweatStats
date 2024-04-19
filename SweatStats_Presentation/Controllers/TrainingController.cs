@@ -8,6 +8,7 @@ namespace SweatStats.Controllers
 {
     public class TrainingController : Controller
     {
+
         public IActionResult Index()
         {
             TrainingViewModel model = new TrainingViewModel();
@@ -51,11 +52,17 @@ namespace SweatStats.Controllers
         {
             ITrainingDAL dal = new TrainingDAL();
             Training training = new Training(dal);
-            TrainingViewModel model = new TrainingViewModel();
+            IOefeningDAL oefeningDal = new OefeningDAL();
+            TrainingViewModel trainingModel = new TrainingViewModel();
             Training trainging = training.GetTraining(id);
-            model.Id = trainging.Id;
-            model.Name = trainging.Name;
-            return View(model);
+            List<Oefening> oefeningen = training.GetOefeningen(oefeningDal);
+            foreach (Oefening oefening in oefeningen)
+            {
+                trainingModel.oefeningen.Add(new OefeningViewModel { Id = oefening.Id, Name = oefening.Name });
+            }
+            trainingModel.Id = trainging.Id;
+            trainingModel.Name = trainging.Name;
+            return View(trainingModel);
         }
     }
 }

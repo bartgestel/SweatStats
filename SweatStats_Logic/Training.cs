@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace SweatStats_Logic
     public class Training
     {
         public ITrainingDAL Dal { get; }
+
+        public IOefeningDAL OefeningDal { get; }
         public int Id { get; set; }
         public string Name { get; set; } = "";
 
@@ -36,6 +39,11 @@ namespace SweatStats_Logic
         public Training GetTraining(int id)
         {
             return Dal.GetTraining(id);
+        }
+
+        public List<Oefening> GetOefeningen(IOefeningDAL dal)
+        {
+            return dal.GetOefeningen(Id);
         }
 
     }

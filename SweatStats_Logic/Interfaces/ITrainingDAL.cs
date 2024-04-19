@@ -15,5 +15,6 @@ namespace SweatStats_Logic.Interfaces
         bool DeleteTraining(int id);
 
         Training GetTraining(int id);
+
     }
 }
