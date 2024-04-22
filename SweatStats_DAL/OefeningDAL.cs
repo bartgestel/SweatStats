@@ -3,6 +3,7 @@ using SweatStats_Logic;
 using SweatStats_Logic.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -69,12 +70,30 @@ namespace SweatStats_DAL
             {
                 Oefening oefening = new Oefening(this);
                 oefening.Id = reader.GetInt32("id");
-                oefening.Name = reader.GetString("naam");
+                int oefeningId = reader.GetInt32("oefening_id");
+                oefening.Name = getOefeningName(oefeningId);
                 oefeningen.Add(oefening);
                 Debug.WriteLine(oefening.Name);
             }
-
+            conn.Close();
             return oefeningen;
+        }
+
+        private string getOefeningName(int oefeningId)
+        {
+            MySqlConnection conn2 = new MySqlConnection("server=86.81.232.42;user=bart;database=SweatStats;port=3306;password=3108Bfh*");
+            string oefeningName = "";
+            MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM oefeningen WHERE id = @id", conn2);
+            cmd2.Parameters.AddWithValue("@id", oefeningId);
+            conn2.Open();
+            MySqlDataReader reader2 = cmd2.ExecuteReader();
+            if (reader2.Read())
+            {
+                oefeningName = reader2.GetString("naam");
+            }
+            reader2.Close();
+            conn2.Close();
+            return oefeningName;
         }
     }
 }

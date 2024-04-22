@@ -41,9 +41,9 @@ namespace SweatStats_Logic
             return Dal.GetTraining(id);
         }
 
-        public List<Oefening> GetOefeningen(IOefeningDAL dal)
+        public List<Oefening> GetOefeningen(IOefeningDAL dal, int id)
         {
-            return dal.GetOefeningen(Id);
+            return dal.GetOefeningen(id);
         }
 
     }

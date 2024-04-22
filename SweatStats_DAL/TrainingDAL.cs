@@ -41,6 +41,9 @@ namespace SweatStats_DAL
         public bool DeleteTraining(int id)
         {
             conn.Open();
+            MySqlCommand mySqlCommand = new MySqlCommand("DELETE FROM training_oefening WHERE training_id = @id", conn);
+            mySqlCommand.Parameters.AddWithValue("@id", id);
+            mySqlCommand.ExecuteNonQuery();
             MySqlCommand cmd = new MySqlCommand("DELETE FROM trainingen WHERE id = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();

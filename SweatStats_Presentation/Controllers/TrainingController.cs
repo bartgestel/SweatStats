@@ -55,7 +55,7 @@ namespace SweatStats.Controllers
             IOefeningDAL oefeningDal = new OefeningDAL();
             TrainingViewModel trainingModel = new TrainingViewModel();
             Training trainging = training.GetTraining(id);
-            List<Oefening> oefeningen = training.GetOefeningen(oefeningDal);
+            List<Oefening> oefeningen = training.GetOefeningen(oefeningDal, id);
             foreach (Oefening oefening in oefeningen)
             {
                 trainingModel.oefeningen.Add(new OefeningViewModel { Id = oefening.Id, Name = oefening.Name });
