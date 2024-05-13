@@ -72,6 +72,10 @@ namespace SweatStats_DAL
                 oefening.Id = reader.GetInt32("id");
                 int oefeningId = reader.GetInt32("oefening_id");
                 oefening.Name = getOefeningName(oefeningId);
+                oefening.Sets = reader.GetInt32("sets");
+                oefening.minReps = reader.GetInt32("min_reps");
+                oefening.maxReps = reader.GetInt32("max_reps");
+                oefening.weightKg = reader.GetDecimal("weight_kg");
                 oefeningen.Add(oefening);
                 Debug.WriteLine(oefening.Name);
             }
@@ -94,6 +98,60 @@ namespace SweatStats_DAL
             reader2.Close();
             conn2.Close();
             return oefeningName;
+        }
+
+        public void DeleteOefening(int id)
+        {
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM training_oefening WHERE id = @id", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public Oefening GetOefening(int id)
+        {
+            int oefeningId = 0;
+
+            Oefening oefening = new Oefening(this);
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM training_oefening WHERE id = @id", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                oefening.Id = reader.GetInt32("id");
+                oefening.Sets = reader.GetInt32("sets");
+                oefening.minReps = reader.GetInt32("min_reps");
+                oefening.maxReps = reader.GetInt32("max_reps");
+                oefening.weightKg = reader.GetDecimal("weight_kg");
+                oefeningId = reader.GetInt32("oefening_id");
+            }
+            reader.Close();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "SELECT * FROM oefeningen WHERE id = @id";
+            cmd.Parameters.AddWithValue("@id", oefeningId);
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                oefening.Name = reader.GetString("naam");
+            }
+            conn.Close();
+            return oefening;
+        }
+
+        public void UpdateOefening(int id, int sets, int minReps, int maxReps, decimal weightKg)
+        {
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("UPDATE training_oefening SET sets = @sets, min_reps = @minReps, max_reps = @maxReps, weight_kg = @weightKg WHERE id = @id", conn);
+            cmd.Parameters.AddWithValue("@sets", sets);
+            cmd.Parameters.AddWithValue("@minReps", minReps);
+            cmd.Parameters.AddWithValue("@maxReps", maxReps);
+            cmd.Parameters.AddWithValue("@weightKg", weightKg);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }

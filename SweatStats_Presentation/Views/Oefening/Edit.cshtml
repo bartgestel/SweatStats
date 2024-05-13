@@ -1,0 +1,31 @@
+﻿@model OefeningViewModel
+@{
+    ViewData["Title"] = "Edit Oefening";
+}
+
+<h1>Edit Oefening</h1>
+<div class="form-container mt-4">
+    <form method="post" asp-controller="Oefening" asp-action="Edit">
+        <div asp-validation-summary="All"></div>
+        <h2>@Model.Name</h2>
+        <div class="mt-3">
+            <label asp-for="Sets"></label>
+            <input class="form-control" asp-for="Sets"/>
+        </div>
+        <div class="mt-3">
+            <label asp-for="minReps"></label>
+            <input class="form-control" asp-for="minReps" />
+        </div>
+        <div class="mt-3">
+            <label asp-for="maxReps"></label>
+            <input class="form-control" asp-for="maxReps" />
+        </div>
+        <div class="mt-3">
+            <label asp-for="weightKg"></label>
+            <input class="form-control" asp-for="weightKg" />
+        </div>
+        <div class="mt-3">
+            <input type="submit" value="Save" class="btn btn-primary login-register-button" />
+        </div>
+    </form>
+</div>

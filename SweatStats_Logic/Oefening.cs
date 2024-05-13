@@ -32,5 +32,20 @@ namespace SweatStats_Logic
         {
             Dal.AddOefening(name, sets, minReps, maxReps, weightKg, trainingId);
         }
+
+        public void DeleteOefening(int id)
+        {
+            Dal.DeleteOefening(id);
+        }
+
+        public Oefening GetOefening(int id)
+        {
+            return Dal.GetOefening(id);
+        }
+
+        public void UpdateOefening(int id, int sets, int minReps, int maxReps, decimal weightKg)
+        {
+            Dal.UpdateOefening(id, sets, minReps, maxReps, weightKg);
+        }
     }
 }

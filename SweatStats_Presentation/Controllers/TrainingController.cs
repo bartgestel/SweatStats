@@ -64,5 +64,22 @@ namespace SweatStats.Controllers
             trainingModel.Name = trainging.Name;
             return View(trainingModel);
         }
+
+        public IActionResult Details(int id)
+        {
+            ITrainingDAL dal = new TrainingDAL();
+            Training training = new Training(dal);
+            IOefeningDAL oefeningDal = new OefeningDAL();
+            TrainingViewModel trainingModel = new TrainingViewModel();
+            Training trainging = training.GetTraining(id);
+            List<Oefening> oefeningen = training.GetOefeningen(oefeningDal, id);
+            foreach (Oefening oefening in oefeningen)
+            {
+                trainingModel.oefeningen.Add(new OefeningViewModel { Id = oefening.Id, Name = oefening.Name, weightKg = oefening.weightKg, Sets = oefening.Sets, minReps = oefening.minReps, maxReps = oefening.maxReps});
+            }
+            trainingModel.Id = trainging.Id;
+            trainingModel.Name = trainging.Name;
+            return View(trainingModel);
+        }
     }
 }

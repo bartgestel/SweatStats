@@ -1,0 +1,23 @@
+﻿@model TrainingViewModel
+@{
+    ViewData["Title"] = "Training";
+}
+
+<h1>@Model.Name</h1>
+@foreach (var oefening in Model.oefeningen)
+{
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">@oefening.Name</h5>
+            <p>Gewicht: @oefening.weightKg KG</p>
+            <p>Sets: @oefening.Sets</p>
+            <p>Min. Reps: @oefening.minReps</p>
+            <p>Max. Reps: @oefening.maxReps</p>
+        </div>
+    </div>
+
+}
+
+<div class="mt-4">
+    <a class="btn btn-primary login-register-button">Start Training</a>
+</div>
