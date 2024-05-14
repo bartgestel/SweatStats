@@ -153,5 +153,15 @@ namespace SweatStats_DAL
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+        
+        public void UpdateWeight(int id, decimal weightKg)
+        {
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("UPDATE training_oefening SET weight_kg = @weightKg WHERE id = @id", conn);
+            cmd.Parameters.AddWithValue("@weightKg", weightKg);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace SweatStats_Logic
         {
             Dal.UpdateOefening(id, sets, minReps, maxReps, weightKg);
         }
+        
+        public void UpdateWeight(int id, decimal weightKg)
+        {
+            Dal.UpdateWeight(id, weightKg);
+        }
     }
 }
