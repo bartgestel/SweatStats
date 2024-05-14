@@ -1,0 +1,50 @@
+﻿@model OefeningViewModel
+@{
+    ViewData["Title"] = "Training doen";
+}
+
+<h1>@Model.Name</h1>
+<p>Set <span id="setCounter">1</span></p>
+<p>Weight @Model.weightKg KG</p>
+<p>min. Reps @Model.minReps</p>
+<p>max. Reps @Model.maxReps</p>
+<label for="reps">Reps</label>
+<input id="reps" type="number" required/>
+<button class="btn btn-primary" id="nextSet" type="submit">Next Set</button>
+
+@section Scripts
+{
+    <script>
+        function isNumber(num){
+            return Number(num) === num;
+        }
+    
+        $(document).ready(function () {
+            let maxReps = @Model.maxReps;
+            let maxSets = @Model.Sets;
+            var reps = [];
+            $('#nextSet').click(function () {
+                reps.push($('#reps').val());
+                console.log(reps);
+                if (reps.length < maxSets) {
+                    $('#reps').val('');
+                    $('#setCounter').text(reps.length + 1);
+                } else {
+                    let check = reps.every(num => num >= maxReps);
+                    if (check) {
+                        let newWeight;
+                        do{
+                            newWeight = prompt('Enter new weight');
+                        }while(!isNumber(Number(newWeight)));
+                        console.log(newWeight);
+                        $.ajax({
+                            url: '@Url.Action("UpdateWeight", "Training")',
+                            type: 'POST',
+                            data: { id: @Model.Id, weight: newWeight }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}
