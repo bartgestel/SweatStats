@@ -35,4 +35,33 @@ public class TrainingTests
 
         Assert.IsNotNull(result);
     }
+    
+    [TestMethod]
+    public void DeleteTraining()
+    {
+        // Arrange
+        var mockDal = new Mock<ITrainingDAL>();
+        mockDal.Setup(x => x.DeleteTraining(It.IsAny<int>())).Returns(true);
+        var training = new Training(mockDal.Object);
+
+        // Act
+        var result = training.DeleteTraining(1);
+
+        Assert.IsTrue(result);
+    }
+    
+    [TestMethod]
+    public void GetTraining()
+    {
+        // Arrange
+        var mockDal = new Mock<ITrainingDAL>();
+        mockDal.Setup(x => x.GetTraining(It.IsAny<int>())).Returns(new Training(mockDal.Object));
+        var training = new Training(mockDal.Object);
+
+        // Act
+        var result = training.GetTraining(1);
+
+        Assert.IsNotNull(result);
+    }
+
 }
