@@ -79,6 +79,8 @@
                         $('#setCounter').text(1);
                     } else {
                         alert('Training is done');
+                        let id = @Model.Id;
+                        window.location.href = '/Training/Details/' + id;
                     }
                 }
             });
