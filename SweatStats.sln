@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweatStats_DAL", "SweatStat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweatStats_Logic", "SweatStats_Logic\SweatStats_Logic.csproj", "{BC6F305B-7657-4491-80E3-CC9E9C7516A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweatStats_Test", "SweatStats_Test\SweatStats_Test.csproj", "{1F88DB1E-91B7-44BD-A78E-93015C30C7EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BC6F305B-7657-4491-80E3-CC9E9C7516A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC6F305B-7657-4491-80E3-CC9E9C7516A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC6F305B-7657-4491-80E3-CC9E9C7516A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F88DB1E-91B7-44BD-A78E-93015C30C7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F88DB1E-91B7-44BD-A78E-93015C30C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F88DB1E-91B7-44BD-A78E-93015C30C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F88DB1E-91B7-44BD-A78E-93015C30C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
