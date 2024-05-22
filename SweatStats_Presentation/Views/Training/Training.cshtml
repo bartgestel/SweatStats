@@ -1,13 +1,13 @@
-﻿@model OefeningViewModel
+﻿@model TrainingViewModel
 @{
     ViewData["Title"] = "Training doen";
 }
 
-<h1>@Model.Name</h1>
+<h1 id="exerciseName"></h1>
 <p>Set <span id="setCounter">1</span></p>
-<p>Weight @Model.weightKg KG</p>
-<p>min. Reps @Model.minReps</p>
-<p>max. Reps @Model.maxReps</p>
+<p>Weight <span id="weightKg"></span>KG</p>
+<p>min. Reps <span id="minReps"></span></p>
+<p>max. Reps <span id="maxReps"></span></p>
 <label for="reps">Reps</label>
 <input id="reps" type="number" required/>
 <button class="btn btn-primary" id="nextSet" type="submit">Next Set</button>
@@ -18,10 +18,28 @@
         function isNumber(num){
             return Number(num) === num;
         }
+        
+        function setExercise(exercise){
+            $('#exerciseName').text(exercise.name);
+            $('#weightKg').text(exercise.weightKg);
+            $('#minReps').text(exercise.minReps);
+            $('#maxReps').text(exercise.maxReps);
+            
+            console.log(exercise);
+        }
     
         $(document).ready(function () {
-            let maxReps = @Model.maxReps;
-            let maxSets = @Model.Sets;
+            let exercises = @Html.Raw(Json.Serialize(Model.oefeningen));
+            let currentExerciseIndex = 0;
+            let currentExercise = exercises[currentExerciseIndex];
+            
+            let maxSets = currentExercise.sets;
+            let maxReps = currentExercise.maxReps;
+            console.log(maxSets);
+            console.log(maxReps);
+            console.log(currentExercise.id);
+            
+            setExercise(currentExercise);
             var reps = [];
             $('#nextSet').click(function () {
                 reps.push($('#reps').val());
@@ -40,8 +58,27 @@
                         $.ajax({
                             url: '@Url.Action("UpdateWeight", "Training")',
                             type: 'POST',
-                            data: { id: @Model.Id, weight: newWeight }
+                            data: { id: currentExercise.id, weight: newWeight }
                         });
+                    }
+                    
+                    let highestRep = Math.max(...reps);
+                    
+                    $.ajax({
+                        url: '@Url.Action("LogExercise", "Training")',
+                        type: 'POST',
+                        data: { id: currentExercise.id, reps: highestRep, weight: currentExercise.weightKg}
+                    });
+                    
+                    currentExerciseIndex++;
+                    if (currentExerciseIndex < exercises.length) {
+                        currentExercise = exercises[currentExerciseIndex];
+                        setExercise(currentExercise);
+                        reps = [];
+                        $('#reps').val('');
+                        $('#setCounter').text(1);
+                    } else {
+                        alert('Training is done');
                     }
                 }
             });

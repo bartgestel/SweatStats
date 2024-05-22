@@ -52,5 +52,10 @@ namespace SweatStats_Logic
         {
             Dal.UpdateWeight(id, weightKg);
         }
+        
+        public void LogExercise(int id, int reps, decimal weightKg)
+        {
+            Dal.LogExercise(id, reps, weightKg);
+        }
     }
 }

@@ -163,5 +163,17 @@ namespace SweatStats_DAL
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+        
+        public void LogExercise(int id, int reps, decimal weight)
+        {
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO oefening_log (oefening_id, reps, weight_kg, date) VALUES (@oefeningId, @reps, @weightKg, @date)", conn);
+            cmd.Parameters.AddWithValue("@oefeningId", id);
+            cmd.Parameters.AddWithValue("@reps", reps);
+            cmd.Parameters.AddWithValue("@weightKg", weight);
+            cmd.Parameters.AddWithValue("@date", DateTime.Today.ToString("yyyy-MM-dd"));
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
     }
 }

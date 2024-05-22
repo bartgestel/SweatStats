@@ -21,5 +21,7 @@ namespace SweatStats_Logic.Interfaces
         void UpdateOefening(int id, int sets, int minReps, int maxReps, decimal weightKg);
         
         void UpdateWeight(int id, decimal weightKg);
+
+        void LogExercise(int id, int reps, decimal weightKg);
     }
 }
