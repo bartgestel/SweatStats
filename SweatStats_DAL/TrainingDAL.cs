@@ -7,7 +7,7 @@ namespace SweatStats_DAL
 {
     public class TrainingDAL : ITrainingDAL
     {
-        MySqlConnection conn = new MySqlConnection("server=86.81.232.42;user=bart;database=SweatStats;port=3306;password=3108Bfh*");
+        MySqlConnection conn = new MySqlConnection("server=86.81.232.42;user=school;database=SweatStats;port=3306;password=hihiyup");
         public bool AddTraining(string name)
         {
             conn.Open();
