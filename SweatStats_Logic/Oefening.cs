@@ -57,5 +57,6 @@ namespace SweatStats_Logic
         {
             Dal.LogExercise(id, reps, weightKg);
         }
+        
     }
 }

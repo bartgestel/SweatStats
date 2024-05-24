@@ -105,6 +105,20 @@ namespace SweatStats.Controllers
             
             return View();
         }
+
+        public IActionResult Stats(int id)
+        {
+            IOefeningDAL dal = new OefeningDAL();
+            OefeningLog oefeningLog = new OefeningLog(dal);
+            OefeningViewModel oefeningModel = new OefeningViewModel();
+            List<OefeningLog> oefeningLogs = oefeningLog.GetOefeningLogs(id);
+            foreach (OefeningLog log in oefeningLogs)
+            {
+                oefeningModel.oefeningLogs.Add(new OefeningLogViewModel { Id = log.Id, Name = log.Name, Reps = log.Reps, WeightKg = log.WeightKg, Date = log.Date });
+            }
+           
+            return View(oefeningModel);
+        }
         
         public void UpdateWeight(int id, decimal weight)
         {

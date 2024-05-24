@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -174,6 +175,27 @@ namespace SweatStats_DAL
             cmd.Parameters.AddWithValue("@date", DateTime.Today.ToString("yyyy-MM-dd"));
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public List<OefeningLog> GetOefeningLogs(int id)
+        {
+            List<OefeningLog> oefeningLogs = new List<OefeningLog>();
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM oefening_log WHERE oefening_id = @id ORDER BY date DESC, id DESC LIMIT 10", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                OefeningLog oefeningLog = new OefeningLog(this);
+                oefeningLog.Id = reader.GetInt32("id");
+                oefeningLog.Reps = reader.GetInt32("reps");
+                oefeningLog.WeightKg = reader.GetDecimal("weight_kg");
+                oefeningLog.Date = reader.GetDateTime("date");
+                oefeningLogs.Add(oefeningLog);
+            }
+            conn.Close();
+            oefeningLogs.Reverse();
+            return oefeningLogs;
         }
     }
 }

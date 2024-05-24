@@ -176,6 +176,7 @@
     <Compile Include="Interfaces\ITrainingDAL.cs" />
     <Compile Include="Interfaces\IUserDAL.cs" />
     <Compile Include="Oefening.cs" />
+    <Compile Include="OefeningLog.cs" />
     <Compile Include="Training.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,38 @@
+﻿@model OefeningViewModel
+@{
+    ViewData["Title"] = "Stats";
+}
+
+<canvas id="myChart"></canvas>
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let oefeningLogs = @Html.Raw(Json.Serialize(Model.oefeningLogs));
+        console.log(oefeningLogs);
+    
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.oefeningLogs.Select(x => x.Date.ToString("d")))),
+                datasets: [{
+                    label: 'Weight (kg)',
+                    data: @Html.Raw(Json.Serialize(Model.oefeningLogs.Select(x => x.WeightKg))),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

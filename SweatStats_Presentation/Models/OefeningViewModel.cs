@@ -16,5 +16,6 @@ namespace SweatStats.Models
         [Required]
         public decimal weightKg { get; set; }
         public List<OefeningViewModel> oefeningen = new List<OefeningViewModel>();
+        public List<OefeningLogViewModel> oefeningLogs = new List<OefeningLogViewModel>();
     }
 }
