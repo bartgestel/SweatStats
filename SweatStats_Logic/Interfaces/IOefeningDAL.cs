@@ -24,6 +24,6 @@ namespace SweatStats_Logic.Interfaces
 
         void LogExercise(int id, int reps, decimal weightKg);
         
-        List<OefeningLog> GetOefeningLogs(int id);
+        List<OefeningLog> GetOefeningLogs(int id, int months);
     }
 }

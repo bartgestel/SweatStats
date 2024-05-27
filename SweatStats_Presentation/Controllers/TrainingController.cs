@@ -106,18 +106,18 @@ namespace SweatStats.Controllers
             return View();
         }
 
-        public IActionResult Stats(int id)
+        public IActionResult Stats()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult GetLogs(int id, int months)
         {
             IOefeningDAL dal = new OefeningDAL();
             OefeningLog oefeningLog = new OefeningLog(dal);
-            OefeningViewModel oefeningModel = new OefeningViewModel();
-            List<OefeningLog> oefeningLogs = oefeningLog.GetOefeningLogs(id);
-            foreach (OefeningLog log in oefeningLogs)
-            {
-                oefeningModel.oefeningLogs.Add(new OefeningLogViewModel { Id = log.Id, Name = log.Name, Reps = log.Reps, WeightKg = log.WeightKg, Date = log.Date });
-            }
-           
-            return View(oefeningModel);
+            List<OefeningLog> oefeningLogs = oefeningLog.GetOefeningLogs(id, months);
+            return Json(oefeningLogs);
         }
         
         public void UpdateWeight(int id, decimal weight)
@@ -133,5 +133,6 @@ namespace SweatStats.Controllers
             Oefening oefening = new Oefening(dal);
             oefening.LogExercise(id, reps, weight);
         }
+        
     }
 }
