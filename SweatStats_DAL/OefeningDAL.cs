@@ -177,12 +177,13 @@ namespace SweatStats_DAL
             conn.Close();
         }
 
-        public List<OefeningLog> GetOefeningLogs(int id)
+        public List<OefeningLog> GetOefeningLogs(int id, int months)
         {
             List<OefeningLog> oefeningLogs = new List<OefeningLog>();
             conn.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM oefening_log WHERE oefening_id = @id ORDER BY date DESC, id DESC LIMIT 10", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM oefening_log WHERE oefening_id = @id AND date >= DATE_SUB(CURRENT_DATE, INTERVAL @months MONTH) ORDER BY date DESC, id DESC", conn);
             cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@months", months);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {

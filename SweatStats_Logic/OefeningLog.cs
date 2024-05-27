@@ -19,9 +19,9 @@ namespace SweatStats_Logic
             Dal = dal;
         }
         
-        public List<OefeningLog> GetOefeningLogs(int id)
+        public List<OefeningLog> GetOefeningLogs(int id, int months)
         {
-            return Dal.GetOefeningLogs(id);
+            return Dal.GetOefeningLogs(id, months);
         }
     }
 }

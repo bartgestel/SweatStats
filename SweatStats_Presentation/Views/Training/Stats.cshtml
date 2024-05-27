@@ -2,7 +2,11 @@
 @{
     ViewData["Title"] = "Stats";
 }
-
+<select class="form-select" id="periodSelect">
+    <option selected value="3">3 months</option>
+    <option value="6">6 months</option>
+    <option value="12">1 year</option>
+</select>
 <canvas id="myChart"></canvas>
 
 @section Scripts
@@ -10,29 +14,53 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        let oefeningLogs = @Html.Raw(Json.Serialize(Model.oefeningLogs));
-        console.log(oefeningLogs);
-    
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: @Html.Raw(Json.Serialize(Model.oefeningLogs.Select(x => x.Date.ToString("d")))),
-                datasets: [{
-                    label: 'Weight (kg)',
-                    data: @Html.Raw(Json.Serialize(Model.oefeningLogs.Select(x => x.WeightKg))),
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+            const periodSelect = document.getElementById('periodSelect');
+            let period = periodSelect.value;
+            var url = window.location.href;
+            const id = url.substring(url.lastIndexOf('/') + 1);
+            console.log(id);
+        
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Weight (kg)',
+                        data: [],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
+            });
+        
+            function getLogs(){
+                $.ajax({
+                    url: '/Training/GetLogs',
+                    type: 'POST',
+                    data: { id: id, months: period },
+                    success: function (data) {
+                        myChart.data.labels = data.map(x => new Date(x.date).toLocaleDateString());
+                        myChart.data.datasets[0].data = data.map(x => x.weightKg);
+                        myChart.update();
+                    }
+                });
             }
-        });
+        
+            getLogs();
+        
+            periodSelect.addEventListener('change', function () {
+                period = periodSelect.value;
+                getLogs();
+            });
+
     </script>
 }
