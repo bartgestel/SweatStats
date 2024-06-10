@@ -60,7 +60,7 @@ namespace SweatStats_DAL
             conn.Close();
         }
 
-        public List<Oefening> GetOefeningen(int id)
+        public List<Oefening> GetOefeningenDetails(int id)
         {
             List<Oefening> oefeningen = new List<Oefening>();
             conn.Open();

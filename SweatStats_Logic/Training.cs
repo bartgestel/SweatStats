@@ -11,8 +11,6 @@ namespace SweatStats_Logic
     public class Training
     {
         public ITrainingDAL Dal { get; }
-
-        public IOefeningDAL OefeningDal { get; }
         public int Id { get; set; }
         public string Name { get; set; } = "";
 
@@ -43,7 +41,7 @@ namespace SweatStats_Logic
 
         public List<Oefening> GetOefeningen(IOefeningDAL dal, int id)
         {
-            return dal.GetOefeningen(id);
+            return dal.GetOefeningenDetails(id);
         }
 
     }

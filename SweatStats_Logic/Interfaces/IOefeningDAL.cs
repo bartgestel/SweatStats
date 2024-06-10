@@ -12,7 +12,7 @@ namespace SweatStats_Logic.Interfaces
 
         void AddOefening(string name, int sets, int minReps, int maxReps, decimal weightKg, int trainingId);
 
-        List<Oefening> GetOefeningen(int id);
+        List<Oefening> GetOefeningenDetails(int id);
 
         void DeleteOefening(int id);
 
